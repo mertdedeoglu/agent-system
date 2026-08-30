@@ -24,6 +24,7 @@ Bu skill, bu skill klasörünün içindeki `assets/clean-code-standards.md` dosy
    - Hiçbir ipucu yoksa proje dizinini sor — bu tek gerekli netleştirme sorusudur.
 
 2. **Hedef dizinin var olduğunu doğrula.** Yoksa kullanıcıya bildir, yanlış yazım olup olmadığını sorma (yeniden dene demek yeterli).
+   - Not: bu skill için "mevcut proje mi yeni proje mi" ayrımı ve dil sorusu gerekmez — kurulan `clean-code-standards.md` dilden bağımsızdır ve her düzenlemede "önce bağlamı oku, proje varsa onun stiline uy, yoksa dilin resmi stil rehberini uygula" talimatını zaten içerir (bkz. `assets/clean-code-standards.md` §1). Yani hem mevcut hem yeni projede otomatik olarak doğru davranır; kurulum anında ekstra soru sormaya gerek yok.
 
 3. **`.claude/rules/` klasörünü oluştur** (yoksa) hedef proje dizini altında.
 

@@ -23,7 +23,9 @@ Only when the user explicitly asks, at the start of a new software project. If a
 
 ## Setup steps
 
-1. **Confirm scope with the user** if not already clear: what kind of project is this, and what raw material exists already (existing docs, specs, README, tickets)? Don't over-ask — one quick check is enough, then proceed.
+1. **Determine existing vs. new project, then confirm scope accordingly.**
+   - **Existing project** (source files, README, or docs already present): analyze what's actually there first — read the README, manifest files (`package.json`/`*.csproj`/`pyproject.toml`/etc.) and a sample of the code — before writing anything into `wiki/`. Seed the wiki pages from what you actually find, not from assumptions.
+   - **New/empty project** (no code yet): ask the user briefly, in one short question, what the project is and what language/stack it will use (if already decided) — this is what `wiki/architecture.md` and `wiki/conventions.md` need to start with real content instead of empty placeholders. Don't over-ask beyond that one check.
 
 2. **Create the directory structure** under `.claude/`:
 

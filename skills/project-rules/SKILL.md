@@ -70,8 +70,10 @@ Do not ask permission before saving a rule — capturing corrections is the whol
 
 This is the "install" step. Run it once per project, and re-run if the user explicitly asks to re-scan.
 
-1. **Scan the codebase.** Read a representative sample of existing files across the languages/frameworks present — enough to infer real conventions, not just skim. Cross-reference what you observe with `clean-code-standards` and any style configs present (`.eslintrc`, `.prettierrc`, `pyproject.toml`, `.editorconfig`, etc.).
-2. **Create `project-rules.md`** at the project root, seeded with rules that describe the *existing, observed* conventions of this codebase (not aspirational ones you'd prefer). Use the format above. Always show the user the seeded list right after writing it, since these are inferred rather than explicitly stated by the user — flag anything you're unsure about rather than asserting it as a hard rule.
+1. **Determine existing vs. new project first.**
+   - **Existing project** (real source files present): scan the codebase — read a representative sample of existing files across the languages/frameworks present, enough to infer real conventions, not just skim. Cross-reference what you observe with `clean-code-standards` and any style configs present (`.eslintrc`, `.prettierrc`, `pyproject.toml`, `.editorconfig`, etc.).
+   - **New/empty project** (no code yet): don't invent rules to scan for. Ask the user briefly what language/stack the project will use, so seed rules (if any) match the intended stack instead of a guess — or, if they'd rather start with an empty file and let Workflow B populate it from real corrections as work begins, that's a valid choice too; ask which they prefer.
+2. **Create `project-rules.md`** at the project root, seeded with rules that describe the *existing, observed* conventions of this codebase (not aspirational ones you'd prefer) — or left empty/minimal for a genuinely new project per the choice above. Use the format above. Always show the user the seeded list right after writing it, since these are inferred rather than explicitly stated by the user — flag anything you're unsure about rather than asserting it as a hard rule.
 3. **Wire up existing agents** (see below) so the learning loop is automatic project-wide, not just in this chat.
 4. Confirm what was created/patched in a short summary — file path, number of seed rules, which agent files were updated.
 
