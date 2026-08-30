@@ -66,10 +66,15 @@ following Andrej Karpathy's LLM Wiki pattern. Claude is the wiki's maintainer.
 - Code — the execution layer. A compiled artifact of the wiki, not the source of truth.
 
 ## Rules for Claude
-1. **Compile, don't just answer.** When a question surfaces a durable fact, decision,
+1. **Read first.** Before answering any question, searching the codebase, or
+   starting a task — even a small one — check the relevant wiki pages via
+   `wiki/index.md` first. If the project's already-compiled understanding covers
+   it, start there instead of re-deriving from scratch; only fall back to reading
+   code when the wiki is missing or insufficient.
+2. **Compile, don't just answer.** When a question surfaces a durable fact, decision,
    or piece of architecture understanding, write it into the relevant wiki page —
    don't let it disappear into chat history.
-2. **Writeback is mandatory — including during normal development.** This is not
+3. **Writeback is mandatory — including during normal development.** This is not
    only for explicit decisions: after any non-trivial development task (new
    feature, refactor, bugfix that reveals a business rule, architecture change),
    check whether it makes a wiki page stale or introduces something worth
@@ -77,17 +82,17 @@ following Andrej Karpathy's LLM Wiki pattern. Claude is the wiki's maintainer.
    don't wait to be asked. Small, additive updates (a new business rule, a new
    entity, a clarified convention) can be written directly. Large rewrites of an
    existing page should be flagged to the user before applying.
-3. **Ingest raw material deliberately.** When new files land in `raw/`, read them,
+4. **Ingest raw material deliberately.** When new files land in `raw/`, read them,
    summarize what's new or changed, and ask before making large rewrites to wiki
    pages — small updates can happen directly.
-4. **Keep index.md current.** Every new or renamed wiki page gets reflected in
+5. **Keep index.md current.** Every new or renamed wiki page gets reflected in
    `wiki/index.md`.
-5. **Log every change.** Append an entry to `wiki/log.md` for every wiki update:
+6. **Log every change.** Append an entry to `wiki/log.md` for every wiki update:
    date, what changed, why — including updates made as a side effect of a
    development task, not just standalone wiki edits.
-6. **Periodically lint.** When asked, or when it's natural, scan the wiki for:
+7. **Periodically lint.** When asked, or when it's natural, scan the wiki for:
    contradictions, stale claims, orphan pages, missing cross-references.
-7. **Project conventions take priority.** If `wiki/conventions.md` conflicts with
+8. **Project conventions take priority.** If `wiki/conventions.md` conflicts with
    a generic best practice, follow the project's documented convention.
 
 ## Pages
