@@ -6,9 +6,10 @@ description: >
   gibi bir istekte bulunduğunda kullan. Bu skill, kalıcı Clean Code Standards
   kuralını (isimlendirme, SOLID/DRY/KISS/YAGNI, hata yönetimi, format,
   proje stiline uyum) kullanıcının seçtiği/belirttiği proje dizininde
-  otomatik olarak `.claude/rules/clean-code-standards.md` dosyası olarak
-  oluşturur, böylece Claude Code o projede her oturumda bu kuralı otomatik
-  okur — ayrıca bir import eklemeye gerek kalmaz.
+  `.claude/rules/clean-code-standards.md` dosyası olarak oluşturur ve
+  bunu projenin `CLAUDE.md`'sine `@import` ederek gerçekten otomatik
+  yüklenmesini sağlar; ayrıca varsa `.claude/agents/*.md` subagent
+  tanımlarını da bu kuralı kontrol edecek şekilde yamalar.
 ---
 
 # Install Clean Code Rule
@@ -29,10 +30,22 @@ Bu skill, bu skill klasörünün içindeki `assets/clean-code-standards.md` dosy
 4. **`assets/clean-code-standards.md` dosyasının içeriğini** hedef dizindeki `.claude/rules/clean-code-standards.md` yoluna kopyala.
    - Eğer o dosya zaten varsa, üzerine yazmadan önce kullanıcıya bildir ve onay al (mevcut özelleştirmeleri kaybetmemek için).
 
-5. **Sonucu kısaca özetle:** dosyanın tam yolu ve bunun ne anlama geldiği (Claude Code'un bu projede her oturumda kuralı otomatik okuyacağı — ekstra `@import` gerekmediği).
+5. **Kuralı gerçekten otomatik hale getir — dosyayı yerleştirmek tek başına yeterli değil.** `.claude/rules/` Claude Code tarafından kendiliğinden taranan bir konum değildir; oturum başında otomatik okunan tek yer proje kök dizinindeki `CLAUDE.md`'dir. Bu yüzden:
+   - Hedef proje kökünde `CLAUDE.md` var mı kontrol et.
+     - Yoksa oluştur, içine tek satır ekle: `@.claude/rules/clean-code-standards.md`
+     - Varsa ve bu satır (veya eşdeğeri) yoksa, dosyanın sonuna ekle. Zaten varsa hiçbir şey yapma.
+   - Bu `@import` satırı Claude Code'un resmi memory-import söz dizimidir; böylece dosya gerçekten her oturumda otomatik yüklenir (yerleştirmiş olmak yetmez).
+
+6. **Varsa mevcut subagent tanımlarını da yamala.** Hedef projede `.claude/agents/*.md` varsa (ör. `create-agent-system` skill'i ile kurulmuş bir sistem), her birine bak:
+   - Dosya zaten `.claude/rules/clean-code-standards.md` referansı içeriyorsa dokunma.
+   - İçermiyorsa, dosyanın başına (frontmatter'dan hemen sonra) şu talimatı ekle: `Before doing any work, check whether \`.claude/rules/clean-code-standards.md\` exists in the project root; if it does, read it and follow/check against it as the primary code-quality standard.`
+   - Bu adım opsiyoneldir ama subagent'ların CLAUDE.md import'unu miras almadığı durumlarda (izole context) kuralın yine de uygulanmasını garanti eder.
+
+7. **Sonucu kısaca özetle:** hangi dosyaların oluşturulduğu/güncellendiği (`clean-code-standards.md`, `CLAUDE.md`, varsa yamalanan agent dosyaları) ve artık kuralın hem ana oturumda hem subagent'larda otomatik uygulanacağı.
 
 ## Notlar
 
-- Bu skill sadece dosyayı ilgili konuma yerleştirir; proje içeriğini veya kodunu değiştirmez.
+- Bu skill dosyayı yerleştirmekle kalmaz, `CLAUDE.md` üzerinden gerçek bir otomatik-yükleme bağlantısı kurar; sadece dosyayı bırakıp "otomatik okunur" varsaymaz.
 - Kural içeriğini güncellemek istersen, önce `assets/clean-code-standards.md` dosyasını güncelle, sonra bu skill'i tekrar çalıştırarak projelere yeniden dağıt.
 - Birden fazla proje için art arda çalıştırılabilir; her çağrıda tek bir hedef dizin kullanılır.
+- `create-agent-system` skill'i ile kurulan agent şablonları zaten bu dosyayı kendiliğinden kontrol edecek şekilde yazılmıştır (kurulum sırası önemli değildir); adım 6, yalnızca bu repo dışında oluşturulmuş veya daha eski agent tanımları için bir güvenlik ağıdır.
