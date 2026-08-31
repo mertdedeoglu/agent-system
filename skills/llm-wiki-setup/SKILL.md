@@ -27,7 +27,7 @@ Only when the user explicitly asks, at the start of a new software project. If a
    - **Existing project** (source files, README, or docs already present): analyze what's actually there first — read the README, manifest files (`package.json`/`*.csproj`/`pyproject.toml`/etc.) and a sample of the code — before writing anything into `wiki/`. Seed the wiki pages from what you actually find, not from assumptions.
    - **New/empty project** (no code yet): ask the user briefly, in one short question, what the project is and what language/stack it will use (if already decided) — this is what `wiki/architecture.md` and `wiki/conventions.md` need to start with real content instead of empty placeholders. Don't over-ask beyond that one check.
 
-2. **Create the directory structure** under `.claude/`:
+2. **Create the directory structure** under `.claude/` (`wiki/features/` is shown here for reference but not created yet — it's added later, on demand, the first time a feature gets documented there):
 
 ```
 .claude/
@@ -41,7 +41,8 @@ Only when the user explicitly asks, at the start of a new software project. If a
     ├── decisions.md       # running log of technical decisions (lightweight ADR log)
     ├── domain.md           # domain model, key entities, glossary
     ├── business-rules.md  # business rules, constraints, calculation logic, edge cases
-    └── conventions.md    # coding conventions, patterns specific to this project
+    ├── conventions.md    # coding conventions, patterns specific to this project
+    └── features/          # one page per feature, added on demand as features are documented
 ```
 
 3. **Populate `.claude/CLAUDE.md`** using the schema template below, filling in project specifics.
@@ -101,6 +102,7 @@ following Andrej Karpathy's LLM Wiki pattern. Claude is the wiki's maintainer.
 - `wiki/domain.md` — domain model, key entities, glossary
 - `wiki/business-rules.md` — business rules, constraints, calculation logic, edge cases
 - `wiki/conventions.md` — project-specific coding conventions and patterns
+- `wiki/features/*.md` — one page per feature, added on demand as features get documented (e.g. by an agent system's docs-writer step) and updated in place on later changes to that feature
 - `wiki/index.md` — catalog of all wiki pages
 - `wiki/log.md` — chronological, append-only change record
 ```
@@ -119,6 +121,13 @@ Catalog of all pages in this project's knowledge wiki.
 | [domain.md](./domain.md) | Domain model & glossary | — |
 | [business-rules.md](./business-rules.md) | Business rules, constraints, edge cases | — |
 | [conventions.md](./conventions.md) | Project conventions | — |
+
+## Features
+
+Per-feature documentation lives in `wiki/features/`, one page per feature, added as features get documented. None yet.
+
+| Feature | Description | Last updated |
+|---|---|---|
 ```
 
 ## `wiki/log.md` stub

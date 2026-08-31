@@ -27,7 +27,12 @@ Match the existing docs' tone and format exactly. If the project has no docs yet
 
 ## LLM Wiki fallback (`.claude/wiki/`)
 
-Check whether `.claude/wiki/` exists (set up by the `llm-wiki-setup` skill) before finishing. If it does, and the feature you just documented has **no other home** — no README section, no API doc, nothing else in this project already describes it — write a short entry about it into the relevant wiki page (e.g. `wiki/domain.md`, `wiki/business-rules.md`, or a new page if none fits) instead of leaving it undocumented. Update `wiki/index.md` if you add a page, and append what you did to `wiki/log.md` per the wiki's own schema (`.claude/CLAUDE.md`).
+Check whether `.claude/wiki/` exists (set up by the `llm-wiki-setup` skill) before finishing. If it does, and the feature you just documented has **no other home** — no README section, no API doc, nothing else in this project already describes it — document it under `wiki/features/`:
+
+- If `wiki/features/` doesn't exist yet, create it — it's a new sub-folder of the wiki, one page per feature.
+- Name the page after the feature's short name, kebab-case (e.g. `wiki/features/user-auth.md`, not a full sentence).
+- First check whether a page for this feature already exists there (a prior change may have created one) — if so, **update it in place** instead of creating a duplicate.
+- Add or update a row for it in `wiki/index.md`'s Features section, and append what you did to `wiki/log.md`, per the wiki's own schema (`.claude/CLAUDE.md`).
 
 Never write into `.claude/raw/` — that folder is immutable source material Claude only reads, per the wiki's own schema. If `.claude/wiki/` doesn't exist, skip this step entirely; don't create the wiki structure yourself (that's `llm-wiki-setup`'s job).
 
