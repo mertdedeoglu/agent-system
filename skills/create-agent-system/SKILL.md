@@ -43,6 +43,7 @@ Before installing anything:
    - Still unclear after reading the code → ask the user rather than guessing.
 4. Check whether `.claude/agents/` already exists and has files. If so, **list what's there and ask the user** whether to overwrite, merge, or rename before writing anything — never silently clobber existing agent definitions.
 5. No detection needed for clean code standards: every implementer/reviewer template already contains an unconditional "check `.claude/rules/clean-code-standards.md` first, fall back to the inline baseline otherwise" instruction. It works whether `install-clean-code-rule` was run before or after this skill, or never.
+6. Same for the LLM wiki: `docs-writer.md` already contains an unconditional check for `.claude/wiki/` (set up by `llm-wiki-setup`) and writes an otherwise-undocumented feature there as a fallback, never into `.claude/raw/`. Works whether `llm-wiki-setup` ran before or after this skill, or never.
 
 ## Step 2 — Customize the templates
 

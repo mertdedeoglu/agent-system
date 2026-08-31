@@ -29,6 +29,15 @@ Amaç: yeni bir proje başlarken burayı referans alıp içindeki skill'leri o p
 
 Her skill kendi `SKILL.md` dosyasında ne zaman tetikleneceğini ve ne ürettiğini tanımlar; Claude Code bu açıklamaya göre otomatik olarak doğru skill'i seçer.
 
+## Önerilen sıra
+
+Skill'ler birbirinden bağımsız çalışır (bkz. Notlar), ama hepsini yeni bir projede kurmak istiyorsan şu sırayla gitmek en temiz sonucu verir — her skill kendinden öncekini otomatik tespit edip ona bağlanacak şekilde yazıldığı için, sıradaki her adım bir öncekini boşa düşürmez:
+
+1. **`llm-wiki-setup`** (yeni proje ise) — `raw/`/`wiki/` temelini en başta kurar, böylece sonraki adımlar üstüne inşa edebilir.
+2. **`install-clean-code-rule`** — global kod standardını `.claude/rules/` altına koyar.
+3. **`project-rules`** — projeye özel, kendini geliştiren kural dosyasını başlatır.
+4. **`create-agent-system`** — agent takımını kurar; implementer/reviewer agent'lar `clean-code-standards.md` ve `project-rules.md`'yi, docs-writer ise `wiki/`'yi varsa otomatik tespit edip kullanır — kurulum sırası ne olursa olsun çalışır, ama bu sıra ilk kurulumda hiçbir şeyin "sonradan bağlanmasını" beklemene gerek bırakmaz.
+
 ## Notlar
 
 - Bu repo tek seferlik bir kurulum kaynağıdır — projeler değiştikçe skill'ler burada güncellenip diğer projelere tekrar taşınabilir.
