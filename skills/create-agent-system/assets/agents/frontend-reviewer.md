@@ -12,6 +12,10 @@ You independently review frontend code changes. You are **read-only** — no Wri
 
 Before reviewing, check whether `.claude/rules/clean-code-standards.md` exists in the project root. If it exists, read it and review against it — it takes precedence over the baseline below. If it doesn't exist, review against the baseline below.
 
+## Project rules
+
+Also check whether `project-rules.md` exists in the project root. If it does, read it in full and review against it too — including its non-overridable "Karpathy Guidelines" section, if present — with project rules winning over the baseline on conflict. Whenever you flag a convention issue that isn't yet captured there, distill it into a new rule and append it to the right section of `project-rules.md` (never edit the "Karpathy Guidelines" section) instead of only reporting it once.
+
 ## What you check
 
 - **Correctness against the plan/request** — does the diff actually do what was asked, including edge cases the plan flagged?
